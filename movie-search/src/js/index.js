@@ -2,9 +2,12 @@ import '../assets/styles/style.css';
 import create from './utils/create.js';
 import CreateInfo from './utils/createInfo.js';
 import createSwiper from './utils/swiper-module.js';
+import vars from './variables.js'
+
 
 getMovieData('land');
 async function getMovieData(word, page = 1) {
+  vars.loading.classList.remove('none');
   const url = `https://www.omdbapi.com/?s=${word}&page=${page}&apikey=e1a5860`;
   const res = await fetch(url);
   const data = await res.json();
@@ -13,6 +16,7 @@ async function getMovieData(word, page = 1) {
     createCards(newData);
     console.log(newData.length);
   } else console.log('gg');
+  vars.loading.classList.add('none');
 }
 
 async function getMovieRatingArray(data) {
