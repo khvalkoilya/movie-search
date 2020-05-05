@@ -14,15 +14,15 @@ export default function createSwiper() {
     breakpoints: {
       20: {
         slidesPerView: 1,
-        spaceBetween: 30,
+        spaceBetween: 0,
       },
       600: {
         slidesPerView: 2,
-        spaceBetween: -30,
+        spaceBetween: 0,
       },
       1024: {
         slidesPerView: 3,
-        spaceBetween: -30,
+        spaceBetween: 0,
       },
       1280: {
         slidesPerView: 4,
