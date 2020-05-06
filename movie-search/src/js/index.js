@@ -2,38 +2,48 @@ import '../assets/styles/style.css';
 import create from './utils/create.js';
 import CreateInfo from './utils/createInfo.js';
 import createSwiper from './utils/swiper-module.js';
-import vars from './variables.js'
+import vars from './variables.js';
 
+getMovieData(vars.word);
 
-getMovieData('land');
+const observer = new MutationObserver(() => {
+  if (vars.next.getAttribute('aria-disabled') === 'true') {
+    vars.page += 1;
+    getMovieData(vars.word, vars.page);
+  }
+});
 
+observer.observe(vars.next, {
+  attributes: true,
+});
 
 async function getMovieData(word, page = 1) {
-  document.querySelector('.error-message').innerHTML = '';
   vars.loading.classList.remove('none');
-  const url = `https://www.omdbapi.com/?s=${word}&page=${page}&apikey=e1a5860`;
-  const res = await fetch(url);
-  const data = await res.json();
-  if (data.Response === 'True') {
-    if(page === 1) {
-      document.querySelector('.swiper-wrapper').innerHTML = '';
-    }
-    const newData = await prepareData(data);
-    createCards(newData);
-  } else {
-    if(data.Error === 'Too many results.') {
+  try {
+    document.querySelector('.error-message').innerHTML = '';
+    const url = `https://www.omdbapi.com/?s=${word}&page=${page}&apikey=e1a5860`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.Response === 'True') {
+      if (page === 1) {
+        document.querySelector('.swiper-wrapper').innerHTML = '';
+      }
+      const newData = await prepareData(data);
+      createCards(newData);
+    } else if (data.Error === 'Too many results.') {
       badRequest(word, 'A lot of matches for the ');
-    }
-    else {
+    } else {
       badRequest(word);
     }
+  } catch (e) {
+    badRequest(e, '');
   }
   vars.loading.classList.add('none');
 }
 
 function badRequest(word, text = 'No results for ') {
-  vars.input.setAttribute('placeholder','Search');
-  const message = create('p','error-message__text', `${text} '${word}'`);
+  vars.input.setAttribute('placeholder', 'Search');
+  const message = create('p', 'error-message__text', `${text} '${word}'`);
   document.querySelector('.error-message').append(message);
 }
 
@@ -65,11 +75,14 @@ async function prepareData(data) {
 function createCards(data) {
   const cards = new CreateInfo(data);
   const cardsList = cards.createCardsList();
-  cardsList.forEach((item) => document.querySelector('.swiper-wrapper').append(item));
-  document.querySelectorAll('.swiper-slide').forEach(item=>item.onload = function () {
-    console.log("yeee");
-  });
-  createSwiper();
+  vars.slides = document.querySelectorAll('.swiper-slide');
+  // vars.slides.forEach((item) => item.onload = function () {
+  //   console.log('yeee');
+  // });
+  if (vars.page === 1) {
+    createSwiper();
+  }
+  vars.swiper.appendSlide(cardsList);
 }
 
 document.querySelector('.search-submit').addEventListener('click', () => searchFunction());
@@ -78,17 +91,19 @@ document.querySelector('.clear-svg').addEventListener('click', () => {
   vars.input.focus();
 });
 
-vars.input.addEventListener('keydown', function(el) {
+vars.input.addEventListener('keydown', (el) => {
   if (el.keyCode === 13) {
     searchFunction();
   }
 });
 
-function searchFunction () {
-  const value = vars.input.value;
+function searchFunction() {
+  const { value } = vars.input;
   vars.input.value = '';
-  if(value.length !== 0) {
+  if (value.length !== 0) {
     vars.input.setAttribute('placeholder', value);
-    getMovieData(value);
+    vars.word = value;
+    vars.page = 1;
+    getMovieData(vars.word);
   }
 }

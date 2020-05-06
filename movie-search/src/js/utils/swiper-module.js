@@ -1,8 +1,8 @@
 import Swiper from 'swiper';
+import vars from '../variables.js';
 
 export default function createSwiper() {
-  const swiper = new Swiper('.swiper-container', {
-    //   loop: true,
+  vars.swiper = new Swiper('.swiper-container', {
     pagination: {
       el: '.swiper-pagination',
       clickable: true,
