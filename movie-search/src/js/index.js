@@ -4,12 +4,12 @@ import CreateInfo from './utils/createInfo.js';
 import createSwiper from './utils/swiper-module.js';
 import vars from './variables.js';
 
-getMovieData(vars.word);
+getMovieData();
 
 const observer = new MutationObserver(() => {
   if (vars.next.getAttribute('aria-disabled') === 'true') {
     vars.page += 1;
-    getMovieData(vars.word, vars.page);
+    getMovieData();
   }
 });
 
@@ -17,33 +17,54 @@ observer.observe(vars.next, {
   attributes: true,
 });
 
-async function getMovieData(word, page = 1) {
+function checkRus() {
+  const matches = vars.word.match(/[а-я]/gi);
+  if (matches !== null && matches.length === vars.word.length) {
+    return true;
+  }
+  return false;
+}
+
+async function getTranslation() {
+  const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200507T161021Z.e1df929ffbdcfb02.e69f728503d882be70c316af4862d16dab9795de&text=${vars.word}&lang=ru-en`
+  const res = await fetch(url);
+  const data = await res.json();
+  return data.text[0];
+}
+
+async function getMovieData() {
   vars.loading.classList.remove('none');
   try {
     document.querySelector('.error-message').innerHTML = '';
-    const url = `https://www.omdbapi.com/?s=${word}&page=${page}&apikey=e1a5860`;
+    if (checkRus()) {
+      vars.word = await getTranslation();
+      reply(`Showing results for '${vars.word}'`, false);
+    }
+    const url = `https://www.omdbapi.com/?s=${vars.word}&page=${vars.page}&apikey=e1a5860`;
     const res = await fetch(url);
     const data = await res.json();
     if (data.Response === 'True') {
-      if (page === 1) {
+      if (vars.page === 1) {
         document.querySelector('.swiper-wrapper').innerHTML = '';
       }
       const newData = await prepareData(data);
       createCards(newData);
     } else if (data.Error === 'Too many results.') {
-      badRequest(word, 'A lot of matches for the ');
-    } else {
-      badRequest(word);
+      reply(`A lot of matches for the '${vars.word}'`);
+    } else if (vars.page === 1) {
+      reply(`No results for '${vars.word}'`);
     }
   } catch (e) {
-    badRequest(e, '');
+    reply(e);
   }
   vars.loading.classList.add('none');
 }
 
-function badRequest(word, text = 'No results for ') {
-  vars.input.setAttribute('placeholder', 'Search');
-  const message = create('p', 'error-message__text', `${text} '${word}'`);
+function reply(text, flag = true) {
+  if(flag) {
+    vars.input.setAttribute('placeholder', 'Search');
+  }
+  const message = create('p', 'error-message__text', text);
   document.querySelector('.error-message').append(message);
 }
 
@@ -79,6 +100,10 @@ function createCards(data) {
   // vars.slides.forEach((item) => item.onload = function () {
   //   console.log('yeee');
   // });
+  // console.log(document.querySelector('.swiper-wrapper').readyState)
+  // document.querySelector('.swiper-wrapper').onload = function() {
+  //   console.log('Страница загружена');
+  // };
   if (vars.page === 1) {
     createSwiper();
   }
@@ -104,6 +129,6 @@ function searchFunction() {
     vars.input.setAttribute('placeholder', value);
     vars.word = value;
     vars.page = 1;
-    getMovieData(vars.word);
+    getMovieData();
   }
 }

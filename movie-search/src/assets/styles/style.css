@@ -22,7 +22,8 @@ html, body {
 
 .header {
   background-color:#84b0af;
-  min-height: 8vh;
+  height: 60px;
+  /* min-height: 8vh; */
   display: flex;
   align-items: center;
 }
@@ -37,7 +38,7 @@ html, body {
 
 
 main {
-  min-height: 84vh;
+  /* min-height: 84vh; */
 }
 
 .input-block {
@@ -175,7 +176,6 @@ main {
 
 .image {
   width: 200px;
-  cursor: pointer;
   height: 312px;
 }
 
@@ -234,7 +234,8 @@ main {
 .footer-block {
   display: flex;
   justify-content: space-between;
-  min-height: 8vh;
+  /* min-height: 8vh; */
+  height: 60px;
   align-items: center;
 }
 
