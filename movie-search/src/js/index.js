@@ -17,8 +17,6 @@ observer.observe(vars.next, {
   attributes: true,
 });
 
-let we = 'Привет Макс'
-console.log(we.match(/[а-я\s]/gi))
 function checkRus() {
   const matches = vars.word.match(/[а-я\s]/gi);
   if (matches !== null && matches.length === vars.word.length) {
@@ -28,7 +26,7 @@ function checkRus() {
 }
 
 async function getTranslation() {
-  const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200507T161021Z.e1df929ffbdcfb02.e69f728503d882be70c316af4862d16dab9795de&text=${vars.word}&lang=ru-en`
+  const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200507T161021Z.e1df929ffbdcfb02.e69f728503d882be70c316af4862d16dab9795de&text=${vars.word}&lang=ru-en`;
   const res = await fetch(url);
   const data = await res.json();
   return data.text[0];
@@ -65,7 +63,7 @@ async function getMovieData() {
 }
 
 function reply(text, flag = true) {
-  if(flag) {
+  if (flag) {
     vars.input.setAttribute('placeholder', 'Search');
   }
   const message = create('p', 'error-message__text', text);
@@ -97,19 +95,12 @@ async function prepareData(data) {
   return data.Search;
 }
 
-function createCards(data) {
+async function createCards(data) {
   const cards = new CreateInfo(data);
   const cardsList = cards.createCardsList();
   if (vars.page === 1) {
     createSwiper();
   }
-  // cardsList.forEach((item)=>console.log(item.children[1]))
-  // cardsList.forEach((item) => item.children[1].firstChild.onload = function () {
-    
-  // });
-  // cardsList[cardsList.length-1].children[1].firstChild.onload = function () {
-  //   console.log("xr")
-  // }
   vars.swiper.appendSlide(cardsList);
   vars.slides = document.querySelectorAll('.swiper-slide');
 }

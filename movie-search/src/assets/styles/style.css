@@ -174,9 +174,10 @@ main {
   padding-top: 10px;
 }
 
-.image {
+img.image {
   width: 200px;
   height: 312px;
+  background: transparent url('../images/tenor.gif') no-repeat scroll center center;
 }
 
 .year {
