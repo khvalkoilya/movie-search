@@ -6,4 +6,5 @@ export default {
   page: 1,
   word: 'land',
   swiper: '',
+  accessUpdate: true,
 };

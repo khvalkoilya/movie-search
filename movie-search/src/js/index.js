@@ -7,7 +7,7 @@ import vars from './variables.js';
 getMovieData();
 
 const observer = new MutationObserver(() => {
-  if (vars.next.getAttribute('aria-disabled') === 'true') {
+  if (vars.next.getAttribute('aria-disabled') === 'true' && vars.accessUpdate) {
     vars.page += 1;
     getMovieData();
   }
@@ -17,8 +17,10 @@ observer.observe(vars.next, {
   attributes: true,
 });
 
+let we = 'Привет Макс'
+console.log(we.match(/[а-я\s]/gi))
 function checkRus() {
-  const matches = vars.word.match(/[а-я]/gi);
+  const matches = vars.word.match(/[а-я\s]/gi);
   if (matches !== null && matches.length === vars.word.length) {
     return true;
   }
@@ -33,6 +35,7 @@ async function getTranslation() {
 }
 
 async function getMovieData() {
+  vars.accessUpdate = false;
   vars.loading.classList.remove('none');
   try {
     document.querySelector('.error-message').innerHTML = '';
@@ -55,9 +58,10 @@ async function getMovieData() {
       reply(`No results for '${vars.word}'`);
     }
   } catch (e) {
-    reply(e);
+    reply(e.message);
   }
   vars.loading.classList.add('none');
+  vars.accessUpdate = true;
 }
 
 function reply(text, flag = true) {
@@ -96,18 +100,18 @@ async function prepareData(data) {
 function createCards(data) {
   const cards = new CreateInfo(data);
   const cardsList = cards.createCardsList();
-  vars.slides = document.querySelectorAll('.swiper-slide');
-  // vars.slides.forEach((item) => item.onload = function () {
-  //   console.log('yeee');
-  // });
-  // console.log(document.querySelector('.swiper-wrapper').readyState)
-  // document.querySelector('.swiper-wrapper').onload = function() {
-  //   console.log('Страница загружена');
-  // };
   if (vars.page === 1) {
     createSwiper();
   }
+  // cardsList.forEach((item)=>console.log(item.children[1]))
+  // cardsList.forEach((item) => item.children[1].firstChild.onload = function () {
+    
+  // });
+  // cardsList[cardsList.length-1].children[1].firstChild.onload = function () {
+  //   console.log("xr")
+  // }
   vars.swiper.appendSlide(cardsList);
+  vars.slides = document.querySelectorAll('.swiper-slide');
 }
 
 document.querySelector('.search-submit').addEventListener('click', () => searchFunction());
