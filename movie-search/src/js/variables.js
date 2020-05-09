@@ -7,4 +7,8 @@ export default {
   word: 'land',
   swiper: '',
   accessUpdate: true,
+  error: document.querySelector('.error-message'),
+  noPoster: './assets/images/no_poster.jpg',
+  clear: document.querySelector('.clear-svg'),
+  submit: document.querySelector('.search-submit'),
 };
