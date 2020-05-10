@@ -8,7 +8,7 @@ export default class CreateInfo {
   createCardsList() {
     const cards = [];
     this.data.forEach(async (item) => {
-      const title = create('div', 'name-block', create('a', 'name', item.Title, null, ['href', `https://www.imdb.com/title/${item.imdbID}/`]));
+      const title = create('div', 'name-block', create('a', 'name', item.Title, null, ['href', `https://www.imdb.com/title/${item.imdbID}/videogallery/`]));
       const image = create('div', 'image-block', create('img', 'image', null, null, ['src', item.Poster]));
       const year = create('div', 'year', item.Year);
       const rate = create('div', 'rating', [create('span', 'star'), item.Rating]);
