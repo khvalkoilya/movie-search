@@ -48,10 +48,16 @@ export function mouseUpFunction(e) {
         vars.lang === 'ru' ? vars.lang = 'eng' : vars.lang = 'ru';
         languages.set('lang', vars.lang);
         keyFill(vars.lang);
+        if (vars.pressCaps) {
+          toggleButtonClickClass(document.querySelector('.CapsLock'), null, 'add');
+        }
       }
     }
   } else {
-    document.querySelectorAll('div').forEach((key) => key.classList.remove('buttonClick'));
+    document.querySelectorAll('div').forEach((key) => {
+      if(!key.classList.contains('CapsLock'))
+        key.classList.remove('buttonClick')
+    });
     vars.field.focus();
   }
 }
