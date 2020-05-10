@@ -24,5 +24,6 @@ module.exports = {
       "import/extensions": ["error", "always", {ignorePackages: true}],
       "max-len": [2, 120, 4, {"ignoreUrls": true}],
       "no-unused-expressions": ["error", { "allowTernary": true }],
+      "no-undef": [0, { "typeof": true }],
     },
 };

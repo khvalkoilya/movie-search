@@ -25,7 +25,7 @@ function searchFunction() {
   showingKeyboard('add');
 }
 
-vars.keyboardIcon.addEventListener('click', ()=>showingKeyboard('toggle'))
+vars.keyboardIcon.addEventListener('click', () => showingKeyboard('toggle'));
 
 function showingKeyboard(type) {
   vars.keyboard.classList[type]('keyboard-hidden');

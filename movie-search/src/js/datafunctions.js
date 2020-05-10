@@ -2,7 +2,7 @@ import create from './utils/create.js';
 import CreateInfo from './utils/createInfo.js';
 import createSwiper from './utils/swiper-module.js';
 import vars from './variables.js';
-import {checkRus, getTranslation} from './russian.js'
+import { checkRus, getTranslation } from './russian.js';
 
 const observer = new MutationObserver(() => {
   if (vars.next.getAttribute('aria-disabled') === 'true' && vars.accessUpdate) {

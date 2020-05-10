@@ -55,8 +55,7 @@ export function mouseUpFunction(e) {
     }
   } else {
     document.querySelectorAll('div').forEach((key) => {
-      if(!key.classList.contains('CapsLock'))
-        key.classList.remove('buttonClick')
+      if (!key.classList.contains('CapsLock')) key.classList.remove('buttonClick');
     });
     vars.field.focus();
   }
