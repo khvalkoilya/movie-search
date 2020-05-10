@@ -22,4 +22,13 @@ function searchFunction() {
     vars.page = 1;
     getMovieData();
   }
+  showingKeyboard('add');
 }
+
+vars.keyboardIcon.addEventListener('click', () => showingKeyboard('toggle'));
+
+function showingKeyboard(type) {
+  vars.keyboard.classList[type]('keyboard-hidden');
+}
+
+export default searchFunction;

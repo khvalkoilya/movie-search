@@ -30,13 +30,13 @@ async function getTranslation() {
 }
 
 function changeModeForLoading(access, toggleType) {
-    vars.accessUpdate = access;
-    vars.loading.classList[toggleType]('none');
+  vars.accessUpdate = access;
+  vars.loading.classList[toggleType]('none');
 }
 
 
 async function getMovieData() {
-    changeModeForLoading(false, 'remove')
+  changeModeForLoading(false, 'remove');
   try {
     vars.error.innerHTML = '';
     if (checkRus()) {
@@ -60,10 +60,11 @@ async function getMovieData() {
   } catch (e) {
     reply(e.message);
   }
-  changeModeForLoading(true, 'add')
+  changeModeForLoading(true, 'add');
 }
 
 function reply(text, flag = true) {
+  vars.error.innerHTML = '';
   if (flag) {
     vars.input.setAttribute('placeholder', 'Search');
   }
