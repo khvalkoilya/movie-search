@@ -345,3 +345,11 @@ img.image {
   }
 }
 
+@media (min-height: 765px) {
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
+
