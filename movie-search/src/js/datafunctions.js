@@ -29,9 +29,14 @@ async function getTranslation() {
   return data.text[0];
 }
 
+function changeModeForLoading(access, toggleType) {
+    vars.accessUpdate = access;
+    vars.loading.classList[toggleType]('none');
+}
+
+
 async function getMovieData() {
-  vars.accessUpdate = false;
-  vars.loading.classList.remove('none');
+    changeModeForLoading(false, 'remove')
   try {
     vars.error.innerHTML = '';
     if (checkRus()) {
@@ -55,8 +60,7 @@ async function getMovieData() {
   } catch (e) {
     reply(e.message);
   }
-  vars.loading.classList.add('none');
-  vars.accessUpdate = true;
+  changeModeForLoading(true, 'add')
 }
 
 function reply(text, flag = true) {
