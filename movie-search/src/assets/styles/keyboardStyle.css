@@ -21,7 +21,6 @@
 
 .keyboard-hidden {
   transform: scale(0);
-  /* transition: 0.5s ease-in-out; */
 }
 
 .active {
@@ -97,5 +96,11 @@
 
 .language {
   width: 34px;
+}
+
+@media (max-width: 1024px) {
+  .keyboard {
+    transform: scale(0);
+  }
 }
 /*# sourceMappingURL=style.css.map */
