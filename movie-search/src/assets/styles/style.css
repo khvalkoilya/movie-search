@@ -1,0 +1,367 @@
+@import "reset.css";
+@import '../../libs/swiperAPI/swiper.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import 'keyboardStyle.css';
+
+html, body {
+  font-family: 'Poppins', sans-serif, Arial;
+  color: #000;
+  font-size: 10px;
+  position: relative;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: #b6d8d5;
+}
+
+.wrapper {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto; 
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.header {
+  background-color:#84b0af;
+  height: 60px;
+  /* min-height: 8vh; */
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  color: #061b33;
+  font-weight: 700;
+  font-size: 3.6rem;
+  text-align: center;
+}
+
+
+
+main {
+  /* min-height: 84vh; */
+}
+
+.input-block {
+  padding-top: 50px;
+  width: 100%;
+  max-width: 1030px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.search-input {
+  height: 45px;
+  border-radius: 20px;
+  width: 89.3%;
+  cursor: text;
+  outline: none;
+  border: 2px solid #8d8d8d;
+  font-size: 2rem;
+  padding-left: 40px;
+  padding-right: 115px;
+  font-weight: 700;
+  color: #061b33;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.search-svg, .keyboard-svg, .clear-svg, .loading {
+  position: absolute;
+  top: 63px;
+  left: 13px;
+}
+
+.keyboard-svg {
+  left: auto;
+  right: 159px;
+  top: 58px;
+  cursor: pointer;
+}
+
+.clear-svg {
+  left: auto;
+  right: 125px;
+  cursor: pointer;
+}
+
+.loading {
+  left: auto;
+  right: 200px;
+  top: 58px;
+  animation: spin 1.3s infinite linear;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.none {
+  display: none;
+}
+
+.search-submit {
+  float: right;
+  width: 100px;
+  height: 45px;
+  border-radius: 18px;
+  color: #061B33;
+  font-size: 1.8rem;
+  font-weight: 700;
+  background-color: #c45238;
+  outline: none;
+  cursor: pointer;
+}
+
+.search-submit:hover {
+  background-color: #964632;
+}
+
+.error-message {
+  height: 70px;
+  margin: 0 auto;
+  max-width: 1030px;
+  overflow: hidden;
+}
+
+.error-message__text {
+  text-align: center;
+  font-weight: 400;
+  font-size: 2rem;
+  color: #061B33;
+  padding-top: 20px;
+}
+
+
+
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-wrapper {
+  height: 430px;
+}
+
+.swiper-slide {
+  width: 200px;
+  height: 100%;
+  text-align: center;
+  animation: 1s appear;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.name-block {
+  height: 41px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.name {
+  font-size: 2rem;
+  color: #c45238;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.name:hover {
+  color: #964632;
+}
+
+.image-block {
+  padding-top: 10px;
+}
+
+img.image {
+  width: 200px;
+  height: 312px;
+  background: transparent url('../images/tenor.gif') no-repeat scroll center center;
+}
+
+.year {
+  padding-top: 10px;
+  font-size: 2rem;
+  color: #c45238;
+  font-weight: 400;
+}
+
+.rating {
+  margin-left: -10px;
+  font-size: 2rem;
+  padding-top: 10px;
+  color: #061b33;
+  font-weight: 700;
+}
+
+.star {
+  padding-right: 8px;
+  background-repeat: no-repeat;
+  background-image: url("../images/sign.svg");
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+  font-size: 3rem;
+  color: #c45238;
+  font-weight: 700;
+}
+
+.swiper-button-next:hover, .swiper-button-prev:hover {
+  transition: 0.4s;
+  transform: scale(1.2);
+}
+
+.swiper-button-prev {
+  left: -4px;
+  outline: none;
+  transition: 0.4s;
+}
+
+.swiper-button-next {
+  right: -4px;
+  outline: none;
+  transition: 0.4s;
+}
+
+.footer {
+  margin-top: 50px;
+  background-color: #061b33;
+}
+
+.footer-block {
+  display: flex;
+  justify-content: space-between;
+  /* min-height: 8vh; */
+  height: 60px;
+  align-items: center;
+}
+
+.footer-link {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #84b0af;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color:#547070;
+}
+
+@media (max-width: 1279px) {
+  .wrapper {
+    max-width: 1024px;
+  }
+
+  .title {
+    font-size: 3.3rem;
+  }
+
+  .input-block, .error-message {
+    max-width: 730px;
+  }
+
+  .search-input {
+    width: 85%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .keyboard-svg {
+    display: none;
+  }
+
+  .loading {
+    right: 49px;
+  }
+
+  .search-submit {
+    display: none;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .clear-svg {
+    right: 15px;
+  }
+
+  .search-input {
+    padding-right: 80px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .wrapper {
+    max-width: 800px;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .input-block, .error-message {
+    max-width: 520px;
+  }
+
+}
+
+@media (max-width: 799px) {
+  .wrapper {
+    max-width: 640px;
+  }
+  .title {
+    font-size: 2.7rem;
+  }
+
+  .footer-link {
+    font-size: 2rem;
+  }
+
+  .input-block, .error-message {
+    max-width: 410px;
+  }
+}
+
+@media (max-width: 479px) {
+  .swiper-button-next, .swiper-button-prev {
+    display: none;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .footer-link {
+    font-size: 1.6rem;
+  }
+
+  .input-block, .error-message {
+    max-width: 260px;
+  }
+}
+
+@media (min-height: 765px) {
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
+

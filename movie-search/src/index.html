@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" type="image/x-icon">
+    <title>Movie Search</title>
+</head>
+<body>
+  <header class="header">
+    <div class="wrapper">
+      <h1 class="title">MovieSearch</h1>
+    </div>
+  </header>
+  <main>
+    <section class="controls">
+      <div class="wrapper">
+        <div class="input-block">
+          <img class="search-svg" width="20" height="20" src="./assets/images/search.svg" alt="search">
+          <img class="keyboard-svg" width="30" height="30" src="./assets/images/keyboard.svg" alt="keyboard">
+          <img class="clear-svg" width="20" height="20" src="./assets/images/clear.svg" alt="clear">
+          <img class="loading none" width="30" height="30" src="./assets/images/shapes.svg" alt="clear">
+          <input type="text" autocomplete="off" autofocus class="search-input" placeholder="Search">
+          <input type="submit" class="search-submit" value="Search">
+        </div>
+      </div>
+    </section>
+    <section class="error-message"></section>
+    <section class="movies">
+      <div class="wrapper">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="wrapper">
+      <div class="footer-block">
+        <a href="https://rs.school/" class="footer-link">RSS-2020Q1</a>
+        <a href="https://github.com/khvalkoilya" class="footer-link">My GitHub</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
